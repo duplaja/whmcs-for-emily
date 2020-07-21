@@ -3,7 +3,7 @@
 Plugin Name: WHMCS Price For Emily
 Plugin URI: https://codeable.io/developers/dan-dulaney/
 Description: Customized WHMCS Price Plugin
-Version: 1.0
+Version: 1.1
 Author: Dan Dulaney
 Author URI: https://codeable.io/developers/dan-dulaney/
 License: GPLv2
@@ -44,6 +44,8 @@ if (! function_exists('get_whmcs_price')) {
 
     function get_whmcs_price($slug,$url) {
 
+	$slug = $slug.'-2';
+	    
         $price = get_transient( $slug );
   
         // Yep!  Just return it and we're done.
@@ -65,6 +67,8 @@ if (! function_exists('get_whmcs_price')) {
 
             $price = str_replace("document.write('",'',$price_raw);
             $price = str_replace("');",'',$price);
+            $price = str_replace("GBP",'',$price);
+            $price = str_replace("USD",'',$price);
 
             set_transient( "$slug", "$price", DAY_IN_SECONDS );
 
